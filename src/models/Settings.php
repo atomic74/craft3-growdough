@@ -28,7 +28,12 @@ class Settings extends Model
     /**
      * @var string
      */
-    public $someAttribute = 'Some Default';
+    public $donationsUrl;
+
+    /**
+     * @var bool
+     */
+    public $testModeEnabled = true;
 
     // Public Methods
     // =========================================================================
@@ -39,8 +44,8 @@ class Settings extends Model
     public function rules()
     {
         return [
-            ['someAttribute', 'string'],
-            ['someAttribute', 'default', 'value' => 'Some Default'],
+            ['donationsUrl', 'string'],
+            ['donationsUrl', 'default', 'value' => 'Some Default'],
         ];
     }
 }

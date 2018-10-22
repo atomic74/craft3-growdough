@@ -9,3 +9,24 @@
  * @package   GrowDough
  * @since     2.0.0
  */
+
+.growdough--help-pane {
+    background-color: #f5f5f5;
+    color: #666;
+    padding: 1em;
+    white-space: nowrap;
+}
+
+.growdough--help-pane dt {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.growdough--help-pane dd {
+    color: #999;
+    margin-bottom: 1em;
+}
+
+.growdough--help-pane dd:last-child {
+    margin-bottom: 0;
+}

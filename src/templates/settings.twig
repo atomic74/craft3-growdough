@@ -17,10 +17,37 @@
 
 {% do view.registerAssetBundle("tungsten\\growdough\\assetbundles\\growdough\\GrowDoughAsset") %}
 
-{{ forms.textField({
-    label: 'Some Field',
-    instructions: 'Enter some setting here.',
-    id: 'someAttribute',
-    name: 'someAttribute',
-    value: settings['someAttribute']})
-}}
+<div class="grid first">
+    <div class="item" data-position="left" data-min-colspan="2">
+        <div class="pane">
+            {{ forms.textField({
+                label: "Donations URL"|t,
+                id: 'donationsUrl',
+                name: 'donationsUrl',
+                instructions: 'Provide the **full** GrowDough donation URL.',
+                placeholder: 'https://secure.growdough.org/donate/{slug}',
+                value: (settings.donationsUrl is defined) ? settings.donationsUrl : '',
+                errors: (settings.donationsUrl is defined) ? settings.getErrors('donationsUrl') : ''
+            }) }}
+
+            {{ forms.lightswitchField({
+                label: "Test Mode Enabled"|t,
+                id: 'testModeEnabled',
+                name: 'testModeEnabled',
+                instructions: "When enabled (green) the **Test Mode** will be enabled during checkout. This allows you to test the integration with GrowDough. The payments will be processed using the **Test Payments Gateway** and all the email confirmations and notifications will be sent to the **Test Email Recipient**."|t,
+                value: settings.testModeEnabled,
+                on: (settings.testModeEnabled is defined) ? settings.testModeEnabled
+            }) }}
+        </div>
+    </div>
+    <div class="item" data-position="right" data-min-colspan="1">
+        <div class="pane growdough--help-pane">
+            <dl>
+                <dt>Live</dt>
+                <dd>https://secure.growdough.org/donate/{slug}</dd>
+                <dt>Beta</dt>
+                <dd>https://beta.growdough.org/donate/{slug}</dd>
+            </dl>
+        </div>
+    </div>
+</div>
