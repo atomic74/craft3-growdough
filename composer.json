@@ -1,5 +1,5 @@
 {
-    "name": "tungsten/grow-dough",
+    "name": "tungsten/growdough",
     "description": "This plugin allows collecting donation designations in a Donations List that works similar to a shopping cart.",
     "type": "craft-plugin",
     "version": "2.0.0",
@@ -34,7 +34,7 @@
         "handle": "grow-dough",
         "hasCpSettings": true,
         "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/atomic74/grow-dough/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/atomic74/craft3-growdough/master/CHANGELOG.md",
         "components": {
             "service": "tungsten\\growdough\\services\\Service",
             "helpersService": "tungsten\\growdough\\services\\HelpersService"

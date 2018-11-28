@@ -10,15 +10,12 @@
 
 namespace tungsten\growdough;
 
-use tungsten\growdough\services\Service as ServiceService;
-use tungsten\growdough\services\HelpersService as HelpersServiceService;
+use tungsten\growdough\services\Service;
 use tungsten\growdough\variables\GrowDoughVariable;
 use tungsten\growdough\models\Settings;
 
 use Craft;
 use craft\base\Plugin;
-use craft\services\Plugins;
-use craft\events\PluginEvent;
 use craft\web\UrlManager;
 use craft\web\twig\variables\CraftVariable;
 use craft\events\RegisterUrlRulesEvent;
@@ -32,8 +29,7 @@ use yii\base\Event;
  * @package   GrowDough
  * @since     2.0.0
  *
- * @property  ServiceService $service
- * @property  HelpersServiceService $helpersService
+ * @property  Service $service
  */
 class GrowDough extends Plugin
 {
@@ -68,15 +64,8 @@ class GrowDough extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['siteActionTrigger1'] = 'grow-dough/default';
-            }
-        );
-
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_CP_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                $event->rules['cpActionTrigger1'] = 'grow-dough/default/do-something';
+                $event->rules['grow-dough/remove-donation-item'] = 'grow-dough/default/remove-donation-item';
+                $event->rules['grow-dough/remove-all-donation-items'] = 'grow-dough/default/remove-all-donation-items';
             }
         );
 
@@ -87,15 +76,6 @@ class GrowDough extends Plugin
                 /** @var CraftVariable $variable */
                 $variable = $event->sender;
                 $variable->set('growDough', GrowDoughVariable::class);
-            }
-        );
-
-        Event::on(
-            Plugins::class,
-            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
-                if ($event->plugin === $this) {
-                }
             }
         );
 

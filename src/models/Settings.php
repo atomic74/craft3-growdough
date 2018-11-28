@@ -10,9 +10,6 @@
 
 namespace tungsten\growdough\models;
 
-use tungsten\growdough\GrowDough;
-
-use Craft;
 use craft\base\Model;
 
 /**
@@ -41,7 +38,7 @@ class Settings extends Model
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             ['donationsUrl', 'string'],

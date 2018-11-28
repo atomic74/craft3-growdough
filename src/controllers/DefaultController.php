@@ -15,6 +15,9 @@ use tungsten\growdough\GrowDough;
 use Craft;
 use craft\web\Controller;
 
+use yii\web\BadRequestHttpException;
+use yii\web\Response;
+
 /**
  * @author    Tungsten Creative Group
  * @package   GrowDough
@@ -31,28 +34,80 @@ class DefaultController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['index', 'do-something'];
+    protected $allowAnonymous = true;
 
     // Public Methods
     // =========================================================================
 
     /**
-     * @return mixed
+     * Handle a request to add new donation item
+     *
+     * e.g.: actions/growdough/default/add-donation-item
+     *
+     * @return null|Response
+     * @throws \yii\web\BadRequestHttpException
      */
-    public function actionIndex()
+    public function actionAddDonationItem()
     {
-        $result = 'Welcome to the DefaultController actionIndex() method';
+        $this->requirePostRequest();
+        $request = Craft::$app->getRequest();
 
-        return $result;
+        $itemId = $request->getRequiredBodyParam('itemId');
+        $itemTitle = $request->getRequiredBodyParam('itemTitle');
+        $itemAttributes = $request->getRequiredBodyParam('itemAttributes');
+
+        GrowDough::$plugin->service->addDonationItem($itemId, $itemTitle, $itemAttributes);
+
+        return $this->redirectToPostedUrl();
     }
 
     /**
-     * @return mixed
+     * Handle a request to remove donation item
+     *
+     * e.g.: actions/growdough/default/remove-donation-item
+     *
+     * @return null|Response
+     * @throws \yii\web\BadRequestHttpException
      */
-    public function actionDoSomething()
+    public function actionRemoveDonationItem()
     {
-        $result = 'Welcome to the DefaultController actionDoSomething() method';
+        $itemId = Craft::$app->request->getRequiredParam('itemId');
 
-        return $result;
+        GrowDough::$plugin->service->removeDonationItem($itemId);
+
+        $redirectUrl = Craft::$app->request->getParam('redirectUrl');
+
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
+        }
+
+        return $this->redirect(Craft::$app->request->getReferrer());
+    }
+
+    /**
+     * Handle a request to remove all donation items
+     *
+     * Expects an AJAX request
+     *
+     * e.g:
+     *
+     * $.get('/actions/growdough/default/remove-all-donation-items', { deleteAll: true }, function(response) {
+     *   console.log('Deleted ' + response.item_count + ' donation items.');
+     * });
+     *
+     * @return null|Response
+     * @throws BadRequestHttpException
+     */
+    public function actionRemoveAllDonationItems()
+    {
+        if (!Craft::$app->request->isAjax) {
+            throw new BadRequestHttpException('Expecting an Ajax request');
+        }
+
+        $removeDonationsItemsCount = GrowDough::$plugin->service->removeAllDonationItems();
+
+        return $this->asJson([
+            'item_count' => $removeDonationsItemsCount
+        ]);
     }
 }

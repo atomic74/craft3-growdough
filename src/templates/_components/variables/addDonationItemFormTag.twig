@@ -1,0 +1,21 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * GrowDough plugin for Craft CMS 3.x
+ *
+ * GrowDough Settings.twig
+ *
+ * @author    Tungsten Creative Group
+ * @copyright Copyright (c) 2018 Tungsten Creative Group
+ * @link      https://www.atomic74.com
+ * @package   GrowDough
+ * @since     2.0.0
+ */
+#}
+
+<form method="post" action="" accept-charset="UTF-8">
+    <input type="hidden" name="action" value="grow-dough/default/add-donation-item">
+    <input type="hidden" name="itemId" value="{{ itemId }}">
+    <input type="hidden" name="itemTitle" value="{{ itemTitle|e }}">
+    <input type="hidden" name="itemAttributes" value="{{ itemAttributes|e }}">
+    {{ csrfInput() }}

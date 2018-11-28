@@ -10,7 +10,6 @@
 
 namespace tungsten\growdough\assetbundles\GrowDough;
 
-use Craft;
 use craft\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
 
@@ -29,7 +28,7 @@ class GrowDoughAsset extends AssetBundle
      */
     public function init()
     {
-        $this->sourcePath = "@tungsten/growdough/assetbundles/growdough/dist";
+        $this->sourcePath = '@tungsten/growdough/assetbundles/growdough/dist';
 
         $this->depends = [
             CpAsset::class,
