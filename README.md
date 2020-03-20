@@ -27,6 +27,12 @@ To install the plugin, follow these instructions.
 - **Donations URL:** Stores the full URL to the donations form for the account
 - **Test Mode Enabled:** Allows to test the GrowDough integration with the Craft website. When enabled, the Test Mode is enabled during the checkout on GrowDough.
 
+When the test mode is enabled, the following hidden input is added to the form:
+
+``` html
+<input id="growdough_test_mode" name="test_mode" value="true" type="hidden">
+```
+
 ## Variables
 
 ### getDonationItems
