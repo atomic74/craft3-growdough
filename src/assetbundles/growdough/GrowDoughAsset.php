@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2018 Tungsten Creative Group
  */
 
-namespace tungsten\growdough\assetbundles\GrowDough;
+namespace tungsten\growdough\assetbundles\growdough;
 
 use craft\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
