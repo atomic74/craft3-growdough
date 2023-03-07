@@ -1,6 +1,6 @@
 <?php
 /**
- * GrowDough plugin for Craft CMS 3.x
+ * GrowDough plugin for Craft CMS 4.x
  *
  * This plugin allows collecting donation designations in a Donations List that works similar to a shopping cart.
  *

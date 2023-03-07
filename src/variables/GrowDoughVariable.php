@@ -1,6 +1,6 @@
 <?php
 /**
- * GrowDough plugin for Craft CMS 3.x
+ * GrowDough plugin for Craft CMS 4.x
  *
  * This plugin allows collecting donation designations in a Donations List that works similar to a shopping cart.
  *
@@ -115,7 +115,7 @@ class GrowDoughVariable
      *
      * @return string Opening form tag with hidden fields.
      **/
-    public function formTag($options = [])
+    public function formTag($options = []): string
     {
         if (!array_key_exists('templateVariables', $options) || !$options['templateVariables']) {
             $options['templateVariables'] = array();
@@ -134,6 +134,13 @@ class GrowDoughVariable
             $paymentMethod = $options['paymentMethod'];
         }
 
+        if (!array_key_exists('donationAmount', $options) || !$options['donationAmount']) {
+            $donationAmount = '';
+        }
+        else {
+            $donationAmount = $options['donationAmount'];
+        }
+
         return PluginTemplateHelper::renderPluginTemplate(
             '_components/variables/formTag',
             [
@@ -142,6 +149,7 @@ class GrowDoughVariable
                 'paymentMethod' => $paymentMethod,
                 'templateVariables' => json_encode($options['templateVariables']),
                 'donationItems' => $donationItems,
+                'donationAmount' => $donationAmount,
             ]
         );
     }
@@ -151,7 +159,7 @@ class GrowDoughVariable
      *
      * @return string The GrowDough donation URL stored in plugin settings.
      **/
-    public function donationsUrl(): string
+    public function donationsUrl(): ?string
     {
         return GrowDough::$plugin->getSettings()->donationsUrl;
     }
@@ -161,7 +169,7 @@ class GrowDoughVariable
      *
      * @return string The GrowDough Giving Card purchase URL.
      **/
-    public function givingCardPurchaseUrl(): string
+    public function givingCardPurchaseUrl(): ?string
     {
         return str_replace('donate', 'giving_cards', $this->donationsUrl());
     }
@@ -190,7 +198,7 @@ class GrowDoughVariable
      *
      * @return string JSON formatted donation items.
      **/
-    public function getDonationItemsJson(): string
+    public function getDonationItemsJson(): ?string
     {
         $donationItems = GrowDough::$plugin->service->getDonationItems();
         if (count($donationItems) > 0) {

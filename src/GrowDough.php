@@ -1,6 +1,6 @@
 <?php
 /**
- * GrowDough plugin for Craft CMS 3.x
+ * GrowDough plugin for Craft CMS 4.x
  *
  * This plugin allows collecting donation designations in a Donations List that works similar to a shopping cart.
  *
@@ -15,6 +15,7 @@ use tungsten\growdough\variables\GrowDoughVariable;
 use tungsten\growdough\models\Settings;
 
 use Craft;
+use craft\base\Model;
 use craft\base\Plugin;
 use craft\web\UrlManager;
 use craft\web\twig\variables\CraftVariable;
@@ -40,14 +41,6 @@ class GrowDough extends Plugin
      * @var GrowDough
      */
     public static $plugin;
-
-    // Public Properties
-    // =========================================================================
-
-    /**
-     * @var string
-     */
-    public $schemaVersion = '2.0.0';
 
     // Public Methods
     // =========================================================================
@@ -95,19 +88,20 @@ class GrowDough extends Plugin
     /**
      * @inheritdoc
      */
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?Model
     {
-        return new Settings();
+        return Craft::createObject(Settings::class);
     }
 
     /**
      * @inheritdoc
      */
-    protected function settingsHtml(): string
+    protected function settingsHtml(): ?string
     {
         return Craft::$app->view->renderTemplate(
             'grow-dough/settings',
             [
+                'plugin' => $this,
                 'settings' => $this->getSettings()
             ]
         );

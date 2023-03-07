@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.0.0 - 2023-03-06
+### Changed
+- Update compatibility with Craft 4.x
+
+### Added
+- Add `donationAmount` option to the **formTag** variable
 ## 2.0.3 - 2021-11-11
 ### Fixed
 - Fix the issue with _Test Mode Enabled_ setting not being saved

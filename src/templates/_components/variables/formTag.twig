@@ -1,7 +1,7 @@
 {# @var craft \craft\web\twig\variables\CraftVariable #}
 {#
 /**
- * GrowDough plugin for Craft CMS 3.x
+ * GrowDough plugin for Craft CMS 4.x
  *
  * GrowDough Settings.twig
  *
@@ -20,4 +20,7 @@
     <input type="hidden" id="growdough_payment_method" name="payment_method" value="{{ paymentMethod }}">
     <input type="hidden" id="growdough_template_variables" name="template_variables" value="{{ templateVariables|e }}">
     <input type="hidden" id="growdough_donation_items" name="donation_items" value="{{ donationItems|e }}">
+    {%- if donationAmount is not empty -%}
+        <input type="hidden" id="growdough_donation_amount" name="donation_amount" value="{{ donationAmount }}">
+    {%- endif -%}
     {{ csrfInput() }}

@@ -1,4 +1,4 @@
-# GrowDough plugin for Craft CMS 3.x
+# GrowDough plugin for Craft CMS 4.x
 
 This plugin allows collecting donation designations in a Donations List that works similar to a shopping cart.
 
@@ -6,7 +6,7 @@ This plugin allows collecting donation designations in a Donations List that wor
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0 or later.
+This plugin requires Craft CMS 4.0.0 or later.
 
 ## Installation
 
@@ -91,6 +91,7 @@ Opening form tag to submit donation to GrowDough. Includes the GrowDough post UR
 - **templateVariables** Include the template variables that should be used in the GrowDough donation workflow (donation form, email receipt, thank you page, etc.) _If not included, an empty JSON array will be submitted._
 - **donationItems** Include an array of donation items to override the items in the donation list. _If not included, an array of donation items will be automatically generated from the donation list._
 - **paymentMethod** Include a predefined payment method (**credit\_card** or **giving_card**) if the form is intended to use a pre-determined GrowDough donation form.
+- **donationAmount** Include a predefined donation amount if the form is intended to use a pre-determined amount on the GrowDough donation form.
 
 #### Most Common Use
 
@@ -103,7 +104,8 @@ The form tag will be most commonly used with templateVariables and paymentType.
     'Variable Key': 'Variable Value',
     ...
   },
-  'paymentMethod': 'credit_card|giving_card'
+  'paymentMethod': 'credit_card|giving_card',
+  'donationAmount': 100
 }) }}
 ```
 
@@ -134,7 +136,8 @@ The form tag will be most commonly used with templateVariables and paymentType.
       }
     }
   ],
-  'paymentMethod': 'credit_card|giving_card'
+  'paymentMethod': 'credit_card|giving_card',
+  'donationAmount': 100
 }) }}
 ```
 
